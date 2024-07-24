@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIn't This Spec-tacular?</title>
+</head>
+<body>
+    <h1 style="background-color:DodgerBlue;">AIn't This Spec-tacular?</h1>
+    <h2 style="background-color:rgb(68, 153, 239);">Welcome Mulesoft Architects, Consultants, and Business Analysts!!</h2>
+    <h3>This OpenAI driven app will generate your architecture spec document with minimal effort</h3>
+    <form action="/submit" method="post">
+        <label for="interface_name">Enter the name of the interface name</label><br>
+        <textarea id="interface_name" name="interface_name" rows="4" cols="16"></textarea><br><br>
+        <label for="user_seqdia_text">Enter the processing steps of your integration, please use numbering like 1,2 etc.</label><br>
+        <textarea id="user_seqdia_text" name="user_seqdia_text" rows="25" cols="100"></textarea><br><br>
+        <label for="user_netdia_text">Enter your networking components and their connectivity details</label><br>
+        <textarea id="user_netdia_text" name="user_netdia_text" rows="25" cols="100"></textarea><br><br>
+        <label for="canonical_json">Enter your Canonical Model JSON for you processing layer API(PAPI). Please put escaped JSON text</label><br>
+        <textarea id="canonical_json" name="canonical_json" rows="25" cols="100"></textarea><br><br>  
+        <input type="submit" value="Submit">
+</body>
+</html>

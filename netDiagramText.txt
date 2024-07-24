@@ -1,0 +1,34 @@
+netDiagramText.txt: failure.
+ortho
+
+actor MyComp_10_1_0_0_16
+actor MyOrg_10_1_0_0_16
+actor MAP_10_1_0_0_20
+actor PS1_10_1_16_0_20
+actor SFDC_10_1_32_0_24
+actor PS2_10_1_48_0_20
+actor NAT1
+actor NAT2
+actor PI
+
+package "MyComp" {
+    Cloud MyComp {
+        Frame "MyOrg" {
+            Rectangle "MAP" as MAP_10_1_0_0_20
+            Rectangle "PS1" as PS1_10_1_16_0_20
+            Rectangle "SFDC" as SFDC_10_1_32_0_24
+            Rectangle "PS2" as PS2_10_1_48_0_20
+        }
+    }
+}
+
+MyComp_10_1_0_0_16 --> MyOrg_10_1_0_0_16
+MyOrg_10_1_0_0_16 --> MAP_10_1_0_0_20
+MAP_10_1_0_0_20 --> PS1_10_1_16_0_20
+PS1_10_1_16_0_20 --> NAT1
+MAP_10_1_0_0_20 --> PS2_10_1_48_0_20
+PS2_10_1_48_0_20 --> NAT2
+NAT1 --> PI
+NAT2 --> PI
+
+@enduml

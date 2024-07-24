@@ -1,0 +1,33 @@
+sequenceDiagramUmlText.txt: failure.
+t Azure_OIDC
+participant vr_bpa_eapi_v1
+participant vr_bpa_papi_v1
+participant vr_bpa_sapi_v1
+participant SF
+participant Vintellegence
+participant Blaze
+participant Melissa
+participant NMVTIS
+
+FLSP -> Azure_OIDC: calls Azure OIDC with Client Id and Client Secret
+Azure_OIDC -> FLSP: returns OAuth token
+FLSP -> vr_bpa_eapi_v1: calls /junk_vehicle_registration_req endpoint with data and OAuth token
+vr_bpa_eapi_v1 -> vr_bpa_papi_v1: passes request payload
+vr_bpa_papi_v1 -> vr_bpa_sapi_v1: passes request payload
+vr_bpa_sapi_v1 -> SF: calls initialize REST API endpoint
+SF -> vr_bpa_papi_v1: returns list of External systems
+vr_bpa_papi_v1 -> Melissa: calls external system
+vr_bpa_papi_v1 -> Vintellegence: calls external system
+vr_bpa_papi_v1 -> Blaze: calls external system
+vr_bpa_papi_v1 -> NMVTIS: calls external system
+Melissa --> vr_bpa_papi_v1: returns response
+Vintellegence --> vr_bpa_papi_v1: returns response
+Blaze --> vr_bpa_papi_v1: returns response
+NMVTIS --> vr_bpa_papi_v1: returns ack
+vr_bpa_papi_v1 -> vr_bpa_sapi_v1: passes combined payload
+vr_bpa_sapi_v1 -> SF: calls finalize REST API endpoint
+SF --> vr_bpa_sapi_v1: returns success or error payload
+vr_bpa_sapi_v1 -> vr_bpa_papi_v1: passes SF payload
+vr_bpa_papi_v1 -> vr_bpa_eapi_v1: passes SF payload
+vr_bpa_eapi_v1 -> FLSP: passes SF payload
+@enduml
