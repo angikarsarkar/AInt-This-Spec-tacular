@@ -2,13 +2,13 @@
 import requests
 from requests.exceptions import HTTPError
 import json
-import os
-import sys
+# import os
+# import sys
 import time
 from flask import Flask, request, render_template_string
 import subprocess
 from docx import Document
-from docx.shared import Inches, Pt
+from docx.shared import Pt
 
 app = Flask(__name__)
 
@@ -46,25 +46,46 @@ def submit():
     # original_stdout = sys.stdout
 
 
-    f = open("sequenceDiagramUmlText.txt", "a")
+    f = open("sequenceDiagramUmlText.txt", "w")
     f.write(sequenceDiagramText)
     f.close()
 
 
-    f = open("netDiagramText.txt", "a")
+    f = open("netDiagramText.txt", "w")
     f.write(netDiagramText)
     f.close()
 
-    # time.sleep(2)
+    time.sleep(2)
 
     with open("sequenceDiagramUmlText.txt", "r+") as output:
-      subprocess.call(["python", "-m","plantuml", "sequenceDiagramUmlText.txt"], stdout=output);
-      print('seq diagram generated')
+      try:
+        subprocess.call(["python", "-m","plantuml", "./sequenceDiagramUmlText.txt"], stdout=output)
+        print('seq diagram generated')
+      except subprocess.CalledProcessError as e:
+        print(e.output)
+        if e.output.startswith('error: {'):
+          error = json.loads(e.output[7:]) # Skip "error: "
+          print(error['code'])
+          print(error['message'])
+          return "ERROR!!!! Something bad happened while generating the Sequence Diagram. Please retry. Sorry for the inconvenience!"
+        
+    with open("sequenceDiagramUmlText.txt", "r+") as output:
+      try:
+        subprocess.call(["python", "-m","plantuml", "./netDiagramText.txt"], stdout=output)
+        print('network diagram generated')
+      except subprocess.CalledProcessError as e:
+        print(e.output)
+        if e.output.startswith('error: {'):
+          error = json.loads(e.output[7:]) # Skip "error: "
+          print(error['code'])
+          print(error['message'])
+          return "ERROR!!!! Something bad happened while generating the Network Diagram. Please retry. Sorry for the inconvenience!"
 
-    with open("netDiagramText.txt", "r+") as output:
-      subprocess.call(["python", "-m","plantuml", "netDiagramText.txt"], stdout=output);
-      print('network diagram generated')
-  
+    # with open("netDiagramText.txt", "r+") as output:
+    #   subprocess.call(["python", "-m","plantuml", "./netDiagramText.txt"], stdout=output)
+    #   print('network diagram generated')
+
+
     
     ###########################################################################################
 
@@ -447,9 +468,9 @@ def craeteDocx(docTitle,docName,user_seqdia_text,apiTable,apiProtocols,mappingVe
     font=run.font
 
     document.add_heading('API Networks and Security')
-    document.add_paragraph(user_netdia_text).add_run()
-    font=run.font
-    run.add_picture('./netDiagramText.png')
+    run3=document.add_paragraph(user_netdia_text).add_run()
+    font=run3.font
+    run3.add_picture('./netDiagramText.png')
 
     document.add_heading('Data Mapping')
     document.add_paragraph(mappingVerbiage.replace("\n","\r\n")).add_run()
