@@ -51,3 +51,9 @@ PI resides totally outside MyComp and not a part of MyComp
 {\"junkVehicleRequest\":{\"accountNumber\":\"45CD3\",\"allocatedCounty\":\"34\",\"certNonOperationDate\":null,\"certNonOperationIndc\":null,\"certificationDate\":\"2023-03-21\",\"certificationIndc\":\"C\",\"clearingIndc\":null,\"costValue\":null,\"dealerDismantlerNumber\":23,\"equipNum\":\"5\",\"feeAcceptanceIndc\":\"N\",\"fileCode\":\"R\",\"firstPartnerId\":\"356732\",\"fuelType\":\"gas\",\"grossCombinedWeight\":\"143\",\"grossVehicleWeight\":\"456\",\"lastTransferDate\":\"2023-03-21\",\"lengthInches\":null,\"lienholderNameOnRecord\":null,\"make\":\"BMW\",\"musselFee\":null,\"numOfTransfers\":3,\"ownerAddress\":[{\"street1\":\"435 cali st\",\"street2\":\"\",\"street3\":\"\",\"city\":\"Sacramento\",\"state\":\"CA\",\"zip\":\"56782\",\"county\":25}],\"ownerInfo\":[{\"codeDlnCurr\":\"DS\",\"nameTxt\":\"Test Driver\",\"typeIndc\":\"SD\"}],\"ownerNameOnRecord\":null,\"ownershipCertIssueDate\":null,\"planNonOper\":\"Y\",\"priorPlateWithOwnerDisp\":null,\"priorUseTax\":null,\"rdfCode\":[\"1\",\"2\"],\"rdfIndicator\":\"Y\",\"regPlateNumber\":\"CAS539D\",\"repossessionDate\":null,\"secondPartnerId\":\"DGF34\",\"tnDate\":\"2023-03-21\",\"transCode\":\"N\",\"typeLicenseCode\":\"D\",\"vinHin\":\"1G6KY54951U110563\",\"vlfWgtExempt\":\"\"}}
 
 
+### How to Run the code?
+from command like run: python app.py
+it will open http://127.0.0.1:5000/
+go to the browser, paste this url and it will land the app front page/form
+fill up the form with above example or your own choices and the word doc (spec) will be generated in the folder from where you are running the code
+
